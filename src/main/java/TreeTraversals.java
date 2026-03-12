@@ -1,5 +1,4 @@
 import java.util.List;
-
 /**
  * Utility class containing tree traversal algorithms for a {@link BinaryTree}.
  *
@@ -21,8 +20,12 @@ public class TreeTraversals {
      * @param result the list to append visited values to (never {@code null})
      */
     public static <V> void preorder(BinaryTree<V> node, List<V> result) {
-        // TODO: implement pre-order traversal
-        throw new UnsupportedOperationException("preorder: not yet implemented");
+
+        if (node == null) return;
+
+        result.add(node.getValue());
+        preorder(node.getLeft(), result);
+        preorder(node.getRight(), result);
     }
 
     /**
@@ -35,8 +38,11 @@ public class TreeTraversals {
      * @param result the list to append visited values to (never {@code null})
      */
     public static <V> void inorder(BinaryTree<V> node, List<V> result) {
-        // TODO: implement in-order traversal
-        throw new UnsupportedOperationException("inorder: not yet implemented");
+        if (node == null) return;
+
+        inorder(node.getLeft(), result);
+        result.add(node.getValue());
+        inorder(node.getRight(), result);
     }
 
     /**
@@ -49,8 +55,11 @@ public class TreeTraversals {
      * @param result the list to append visited values to (never {@code null})
      */
     public static <V> void postorder(BinaryTree<V> node, List<V> result) {
-        // TODO: implement post-order traversal
-        throw new UnsupportedOperationException("postorder: not yet implemented");
+        if (node == null) return;
+
+        postorder(node.getLeft(), result);
+        postorder(node.getRight(), result);
+        result.add(node.getValue());
     }
 
     /**
@@ -65,7 +74,24 @@ public class TreeTraversals {
      * @param result the list to append visited values to (never {@code null})
      */
     public static <V> void levelorder(BinaryTree<V> node, List<V> result) {
-        // TODO: implement level-order traversal
-        throw new UnsupportedOperationException("levelorder: not yet implemented");
+        if (node == null) return;
+
+
+        java.util.Queue<BinaryTree<V>> queue = new java.util.LinkedList<>();
+        
+        queue.add(node);
+
+
+        while (!queue.isEmpty()) {
+            BinaryTree<V> current = queue.poll();
+            result.add(current.getValue());
+
+            if (current.getLeft() != null) {
+                queue.add(current.getLeft());
+            }
+            if (current.getRight() != null) {
+                queue.add(current.getRight());
+            }
+        }
     }
 }
